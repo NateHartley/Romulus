@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Romulus",
+    "description": "Password checker and generator.",
+    "version": "1.0",
+    "action": {
+        "default_popup": "/popup/popup.html",
+        "default_icon": "/images/NH.png"
+    }
+} 
