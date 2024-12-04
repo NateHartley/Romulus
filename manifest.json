@@ -5,6 +5,6 @@
     "version": "1.0",
     "action": {
         "default_popup": "/popup/popup.html",
-        "default_icon": "/images/NH.png"
+        "default_icon": "/images/RomulusIcon.png"
     }
 } 
