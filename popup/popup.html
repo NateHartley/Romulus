@@ -3,14 +3,23 @@
   <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   </head>
   <body>
-    <h1>Romulus</h1>
+    <div id="title">
+      <p>Romulus</p>
+    </div>
 
-    <p id="pwd">Password...</p>
-    <button id="btn1">Generate</button>
-    <button id="btn2">Copy text</button>
+    <div id="password">
+      <p id="pwd">Password...</p>
+    </div>
+
+    <div id="buttons">
+      <button id="btn1">Generate</button>
+      <button id="btn2"><i class="fa fa-clipboard"></i></button>
+    </div>
+    
     <script src="../scripts/generator.js"></script>
 
   </body>
