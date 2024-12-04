@@ -1,4 +1,25 @@
 html {
-    width: 300px;  /* max: 800px */
+    width: 250px;  /* max: 800px */
     height: 200px; /* max: 600px */
+}
+
+body {
+    display: block;
+}
+
+#title {
+    background-color: grey;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2.5em;
+    font-weight: 400;
+}
+
+#password {
+    text-align: center;
+    font-size: 1.25em;
+}
+
+#buttons {
+    text-align: center;
 }
