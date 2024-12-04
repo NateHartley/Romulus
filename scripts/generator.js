@@ -51,7 +51,7 @@ function gen_pwd(){
     // FIXME: Password is sometimes more that 16 characters (?)
     password = pwd_array.join('');
     document.getElementById("pwd").innerHTML = password;
-    console.log("Password >>>>", password, "<<<<");
+    console.log("Debug: Password >>", password, "<<");
 }
 
 function gen_rand() {
