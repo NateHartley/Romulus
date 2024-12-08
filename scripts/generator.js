@@ -1,5 +1,7 @@
 document.getElementById("btn1").addEventListener("click", gen_pwd_secure);
 document.getElementById("btn2").addEventListener("click", copy_text);
+document.getElementById("chkbx1").addEventListener("click", checkbox_upper_only);
+document.getElementById("chkbx2").addEventListener("click", checkbox_lower_only);
 
 var alphabet_lc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var alphabet_uc = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -13,6 +15,9 @@ var compare_rand_sec = undefined;
 var group = undefined;
 var i = 0;
 var j = 0;
+var upper_only = false;
+var lower_only = false;
+const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 
 /*
 gen_pwd(), gen_rand()
@@ -103,11 +108,11 @@ function gen_rand_secure() {
     var repeat = false;
 
     // Uppercase
-    if (rand_sec > 64 && rand_sec < 91) {
+    if ((rand_sec > 64 && rand_sec < 91) && (lower_only == false)) {
         group = 1;
 
     // Lowercase
-    } else if (rand_sec > 96 && rand_sec < 123) {
+    } else if ((rand_sec > 96 && rand_sec < 123) && (upper_only == false)) {
         group = 2;
 
     // Number
@@ -162,3 +167,40 @@ function copy_text() {
 
     navigator.clipboard.writeText(copy_text);
 }
+
+
+function checkbox_upper_only() {
+    var checkbox = document.getElementById("chkbx1");
+    checkbox.checked ? upper_only = true : upper_only = false;
+    if (lower_only) {
+        lower_only = false;
+    }
+    console.log("Upper status", upper_only);
+}
+
+function checkbox_lower_only() {
+    var checkbox = document.getElementById("chkbx2");
+    checkbox.checked ? lower_only = true : lower_only = false;
+    if (upper_only) {
+        upper_only = false;
+    }
+    console.log("Lower status", lower_only);
+}
+
+function handleCheckboxClick(event) {
+  checkBoxes.forEach((checkBox) => {
+    var upper_only_chkbx = checkBoxes[0];
+    var lower_only_chkbx = checkBoxes[1];
+
+    if (event.target == upper_only_chkbx) {
+        lower_only_chkbx.checked = false;
+    } else if (event.target == lower_only_chkbx) {
+        upper_only_chkbx.checked = false;
+    }
+    
+  });
+}
+
+checkBoxes.forEach((checkBox) => {
+  checkBox.addEventListener('click', handleCheckboxClick);
+});
