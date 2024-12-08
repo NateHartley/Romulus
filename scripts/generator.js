@@ -148,9 +148,17 @@ function gen_rand_secure() {
 
 function copy_text() {
     var copy_text = document.getElementById("pwd").innerHTML;
-    navigator.clipboard.writeText(copy_text);
 
-    // FIXME: Sometimes will add amp; within password (always after the & character)
-    // E.g. Password = F*c~Uy-C'U&Vs,g@      Copied text = F*c~Uy-C'U&amp;Vs,g@
-    //                                                                ^^^^
+    // If copy_text contains "&" symbol, remove the "amp;" code after it
+    for (let i = 0; i < copy_text.length; i++) {
+        if (copy_text[i] == "&") {
+            let j = 0;
+            while (j < 4){
+                copy_text = copy_text.replace(copy_text[i+1], "");
+                j++;
+            }
+        }
+    }
+
+    navigator.clipboard.writeText(copy_text);
 }
