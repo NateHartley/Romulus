@@ -50,3 +50,13 @@ body {
 .button:active {
     background-color: #aa6300;
 }
+
+#checkbox_item {
+    display: inline-flex;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
