@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Romulus",
-    "description": "Password checker and generator.",
+    "description": "Cryptographically strong password generator.",
     "version": "1.0",
     "action": {
         "default_popup": "/popup/popup.html",
