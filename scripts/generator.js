@@ -1,25 +1,29 @@
-document.getElementById("btn1").addEventListener("click", gen_pwd_secure);
+document.getElementById("btn1").addEventListener("click", gen_pwd);
 document.getElementById("btn2").addEventListener("click", copy_text);
 document.getElementById("chkbx1").addEventListener("click", checkbox_upper_only);
 document.getElementById("chkbx2").addEventListener("click", checkbox_lower_only);
+document.getElementById("chkbx3").addEventListener("click", checkbox_no_numbers);
+document.getElementById("chkbx4").addEventListener("click", checkbox_no_symbols);
 
 var rand = undefined;
 var compare_rand = undefined;
 var group = undefined;
 var upper_only = false;
 var lower_only = false;
+var no_numbers = false;
+var no_symbols = false;
 const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 
 
 /*  
     ==============================================
-    gen_pwd_secure(), gen_rand_secure()
+    gen_pwd(), gen_rand()
     Higher level generation of a cryptographically
     strong random password.
     ==============================================
 */
 
-function gen_pwd_secure() {
+function gen_pwd() {
     var password = undefined;
     var pwd_array = [];
 
@@ -28,7 +32,7 @@ function gen_pwd_secure() {
             break;
         }
 
-        var char = gen_rand_secure();
+        var char = gen_rand();
         var text = String.fromCharCode(char); // Ascii code to text
         pwd_array.push(text);
     }
@@ -38,7 +42,7 @@ function gen_pwd_secure() {
     console.log("Debug: Password >>", password, "<<   Length:", password.length);
 }
 
-function gen_rand_secure() {
+function gen_rand() {
     var int8 = new Int8Array(1);
     crypto.getRandomValues(int8);
     rand = int8[0]; // Return first val of int8 array which is the random val
@@ -53,33 +57,39 @@ function gen_rand_secure() {
         group = 2;
 
     // Number
-    } else if (rand > 47 && rand < 58) {
+    } else if ((rand > 47 && rand < 58) && (no_numbers == false)) {
         group = 3;
 
     // Symbol
-    } else if (
+    } else if ((
         (rand > 32 && rand < 48) || 
         ((rand > 57 && rand < 65) && 
         (rand != 60 && rand != 62)) || 
         (rand > 90 && rand < 97) || 
-        (rand > 122 && rand < 127)) {
+        (rand > 122 && rand < 127)) && (no_symbols == false)) {
         group = 4;
 
     // Out of bounds
     } else if ((rand < 33 || rand > 126) || 
         (rand == 60 || rand == 62)) {
         repeat = true;
+    } else {
+        repeat = true;
     }
 
     // Stops back to back same type of characters
+    // Unless upper/lower case, no numbers, and no symbols is selected together
     if (compare_rand == group && compare_rand != undefined){
-        repeat = true;
+        if (!(no_numbers == true && no_symbols == true && 
+            (upper_only == true || lower_only == true))) {
+            repeat = true;
+        }
     }
 
     // Unfixable loop occurs when calling more than one instance of gen_rand_sec() within itself
     // Having only one instance of a callback seems to fix it
     if (repeat) {
-        gen_rand_secure();
+        gen_rand();
     }
 
     compare_rand = group;
@@ -107,19 +117,23 @@ function copy_text() {
 function checkbox_upper_only() {
     var checkbox = document.getElementById("chkbx1");
     checkbox.checked ? upper_only = true : upper_only = false;
-    if (lower_only) {
-        lower_only = false;
-    }
-    console.log("Upper status", upper_only);
+    if (lower_only) { lower_only = false; }
 }
 
 function checkbox_lower_only() {
     var checkbox = document.getElementById("chkbx2");
     checkbox.checked ? lower_only = true : lower_only = false;
-    if (upper_only) {
-        upper_only = false;
-    }
-    console.log("Lower status", lower_only);
+    if (upper_only) { upper_only = false; }
+}
+
+function checkbox_no_numbers() {
+    var checkbox = document.getElementById("chkbx3");
+    checkbox.checked ? no_numbers = true: no_numbers = false;
+}
+
+function checkbox_no_symbols() {
+    var checkbox = document.getElementById("chkbx4");
+    checkbox.checked ? no_symbols = true: no_symbols = false;
 }
 
 function handleCheckboxClick(event) {
@@ -132,7 +146,6 @@ function handleCheckboxClick(event) {
     } else if (event.target == lower_only_chkbx) {
         upper_only_chkbx.checked = false;
     }
-    
   });
 }
 
