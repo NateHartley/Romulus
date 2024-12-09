@@ -5,7 +5,7 @@
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
 # Romulus
-Cryptographically strong password generator.
+Cryptographically strong password generator web extension.
 
 ---
 </div>
