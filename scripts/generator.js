@@ -1,4 +1,4 @@
-document.getElementById("btn1").addEventListener("click", gen_pwd);
+document.getElementById("btn1").addEventListener("click", gen_password);
 document.getElementById("btn2").addEventListener("click", copy_text);
 document.getElementById("chkbx1").addEventListener("click", checkbox_upper_only);
 document.getElementById("chkbx2").addEventListener("click", checkbox_lower_only);
@@ -6,8 +6,9 @@ document.getElementById("chkbx3").addEventListener("click", checkbox_no_numbers)
 document.getElementById("chkbx4").addEventListener("click", checkbox_no_symbols);
 document.getElementById("chkbx5").addEventListener("click", checkbox_simplified_symbols);
 
-var rand = undefined;
-var compare_rand = undefined;
+// Global Variables
+var rand = undefined; // Must be global var or password will contain out of bounds chars
+var compare_group = undefined;
 var group = undefined;
 var upper_only = false;
 var lower_only = false;
@@ -17,25 +18,17 @@ var simplified_symbols = false;
 const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 
 
-/*  
-    ==============================================
-    gen_pwd(), gen_rand()
-    Higher level generation of a cryptographically
-    strong random password.
-    ==============================================
-*/
-
-function gen_pwd() {
+function gen_password() {
     var password = undefined;
     var pwd_array = [];
-    var simplified_symbols_list_ascii = ["!", "#", "%", "+", ":", "=", "?", "@"];
+    const simplified_symbols_list_ascii = ["!", "#", "%", "+", ":", "=", "?", "@"];
 
     while (true) {
         if (pwd_array.length == 16) {
             break;
         }
 
-        var char = gen_rand();
+        var char = gen_random();
         var text = String.fromCharCode(char); // Ascii code to text
         pwd_array.push(text);
     }
@@ -61,12 +54,12 @@ function gen_pwd() {
     console.log("Debug: Password >>", password, "<<   Length:", password.length);
 }
 
-function gen_rand() {
+function gen_random() {
     var int8 = new Int8Array(1);
     crypto.getRandomValues(int8);
-    rand = int8[0]; // Return first val of int8 array which is the random val
+    rand = int8[0]; // Value at index 0 is random int
     var repeat = false;
-    var simplified_symbols_list_dec = [33, 35, 37, 43, 58, 61, 63, 64]; // ! # % + : = ? @
+    const simplified_symbols_list_dec = [33, 35, 37, 43, 58, 61, 63, 64]; // ! # % + : = ? @
 
     // Uppercase
     if ((rand > 64 && rand < 91) && (lower_only == false)) {
@@ -103,20 +96,20 @@ function gen_rand() {
 
     // Stops back to back same type of characters
     // Unless upper/lower case, no numbers, and no symbols is selected together
-    if (compare_rand == group && compare_rand != undefined){
+    if (compare_group == group && compare_group != undefined){
         if (!(no_numbers == true && no_symbols == true && 
             (upper_only == true || lower_only == true))) {
             repeat = true;
         }
     }
 
-    // Unfixable loop occurs when calling more than one instance of gen_rand_sec() within itself
+    // Unfixable loop occurs when calling more than one instance of gen_random() within itself
     // Having only one instance of a callback seems to fix it
     if (repeat) {
-        gen_rand();
+        gen_random();
     }
 
-    compare_rand = group;
+    compare_group = group;
 
     return rand;
 }
@@ -167,7 +160,7 @@ function checkbox_simplified_symbols() {
     if (no_symbols) { no_symbols = false; }
 }
 
-function handleCheckboxClick(event) {
+function handle_checkbox_click(event) {
   checkBoxes.forEach((checkBox) => {
     var upper_only_chkbx = checkBoxes[0];
     var lower_only_chkbx = checkBoxes[1];
@@ -189,5 +182,5 @@ function handleCheckboxClick(event) {
 }
 
 checkBoxes.forEach((checkBox) => {
-  checkBox.addEventListener('click', handleCheckboxClick);
+  checkBox.addEventListener('click', handle_checkbox_click);
 });
