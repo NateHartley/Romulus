@@ -164,8 +164,8 @@ function handle_checkbox_click(event) {
   checkBoxes.forEach((checkBox) => {
     var upper_only_chkbx = checkBoxes[0];
     var lower_only_chkbx = checkBoxes[1];
-    var no_symbols_chkbx = checkBoxes[3];
-    var simplified_symbols_chkbx = checkBoxes[4];
+    var no_symbols_chkbx = checkBoxes[2];
+    var simplified_symbols_chkbx = checkBoxes[3];
 
     if (event.target == upper_only_chkbx) {
         lower_only_chkbx.checked = false;
