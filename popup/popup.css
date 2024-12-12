@@ -1,5 +1,5 @@
 html {
-    width: 250px;  /* max: 800px */
+    width: 300px;  /* max: 800px */
     height: 200px; /* max: 600px */
 }
 
@@ -35,15 +35,20 @@ body {
 }
 
 .button {
-    background-color: #e68701;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    text-align: center;
+
+    padding: 10px 15px;
     margin: 4px 2px;
+
+    background-color: #e68701;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -53,10 +58,29 @@ body {
 
 #checkbox_item {
     display: inline-flex;
+    text-align: center;
+    align-items: center;
+
+    max-height: 38px;
+    padding: 0px 10px;
+    margin: 4px 2px;
+
+    background-color: #e68701;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+#row {
+    text-align: center;
 }
