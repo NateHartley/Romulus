@@ -36,8 +36,8 @@ function gen_password() {
     // If simplified symbols mode is on, but password doesn't contain any symbols, replace last char of password with symbol
     if (simplified_symbols) {
         var count = 0;
-        for (let j = 0; j < simplified_symbols_list_ascii.length; j++) {
-            if (pwd_array.includes(simplified_symbols_list_ascii[j]) == false) {
+        for (let i = 0; i < simplified_symbols_list_ascii.length; i++) {
+            if (pwd_array.includes(simplified_symbols_list_ascii[i]) == false) {
                 count++;
             }
         }
