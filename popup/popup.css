@@ -30,6 +30,10 @@ body {
     font-family: monospace, monospace;
 }
 
+#password p {
+    word-wrap: break-word;
+}
+
 #buttons {
     text-align: center;
 }
@@ -81,6 +85,7 @@ body {
 
 #checkbox_item:hover {
     background-color: #d87f03;
+    cursor: default;
 }
 
 ul {
