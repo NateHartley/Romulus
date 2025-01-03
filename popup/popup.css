@@ -52,6 +52,10 @@ body {
     cursor: pointer;
 }
 
+.button:hover {
+    background-color: #d87f03;
+}
+
 .button:active {
     background-color: #aa6300;
 }
@@ -75,6 +79,10 @@ body {
     font-size: 16px;
 }
 
+#checkbox_item:hover {
+    background-color: #d87f03;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -83,4 +91,59 @@ ul {
 
 #row {
     text-align: center;
+}
+
+.slidecontainer {
+    width: 100%;
+    display: inline-flex;
+    margin-bottom: 20px;
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 190px;
+    margin-right: 8px;
+    height: 30px;
+    background: #e68701;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
+    border: none;
+    background: white;
+    cursor: pointer;
+}
+
+.slider:hover {
+    background-color: #d87f03; 
+}
+
+.slidecontainer p {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+
+    background-color: #e68701;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+    padding-left: 10px;
+    min-width: 80px;
+    margin: 0;
+
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
 }

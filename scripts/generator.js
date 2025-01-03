@@ -16,6 +16,8 @@ var no_numbers = false;
 var no_symbols = false;
 var simplified_symbols = false;
 const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+var slider = document.getElementById("slider");
+var pwd_length = document.getElementById("pwd_length");
 
 
 function gen_password() {
@@ -24,7 +26,7 @@ function gen_password() {
     const simplified_symbols_list_ascii = ["!", "#", "%", "+", ":", "=", "?", "@"];
 
     while (true) {
-        if (pwd_array.length == 16) {
+        if (pwd_array.length == slider.value) {
             break;
         }
 
@@ -182,5 +184,13 @@ function handle_checkbox_click(event) {
 }
 
 checkBoxes.forEach((checkBox) => {
-  checkBox.addEventListener('click', handle_checkbox_click);
+    checkBox.addEventListener('click', handle_checkbox_click);
 });
+
+// Displays default slider value (16)
+pwd_length.innerHTML = slider.value;
+
+// Updates current slider value
+slider.oninput = function() {
+    pwd_length.innerHTML = this.value;
+}
